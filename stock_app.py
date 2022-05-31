@@ -67,7 +67,7 @@ closing_price=scaler.inverse_transform(closing_price)
 
 train=new_data[:987]
 valid=new_data[987:]
-valid['Predictions']=closing_price
+#valid.loc['Predictions']=closing_price
 
 
 
@@ -108,7 +108,7 @@ app.layout = html.Div([
 						"data":[
 							go.Scatter(
 								x=valid.index,
-								y=valid["Predictions"],
+								#y=valid["Predictions"],
 								mode='markers'
 							)
 

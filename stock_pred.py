@@ -80,6 +80,6 @@ lstm_model.save("saved_lstm_model.h5")
 
 train_data=new_dataset[:987]
 valid_data=new_dataset[987:]
-prediction_closing = valid_data['Predictions']
+#prediction_closing = valid_data['Predictions']
 plt.plot(train_data["Close"])
-plt.plot(valid_data[['Close',"Predictions"]])
+#plt.plot(valid_data[['Close',"Predictions"]])
