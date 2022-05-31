@@ -23,7 +23,7 @@ df_nse.index=df_nse['Date']
 
 
 data=df_nse.sort_index(ascending=True,axis=0)
-new_data=pd.DataFrame(index=range(0,len(df_nse)),columns=['Date','Close','Predictions'])
+new_data=pd.DataFrame(index=range(0,len(df_nse)),columns=['Date','Close'])
 
 for i in range(0,len(data)):
     new_data["Date"][i]=data['Date'][i]
@@ -67,7 +67,7 @@ closing_price=scaler.inverse_transform(closing_price)
 
 train=new_data[:987]
 valid=new_data[987:]
-valid['Predictions']=closing_price
+valid.insert(1,"Predictions", closing_price, True)
 
 
 
