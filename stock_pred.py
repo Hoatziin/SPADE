@@ -77,6 +77,8 @@ predicted_closing_price=scaler.inverse_transform(predicted_closing_price)
 
 lstm_model.save("saved_lstm_model.h5")
 
+df= pd.read_csv("./stock_data.csv")
+
 train_data=new_dataset[:987]
 valid_data=new_dataset[987:]
 valid_data.insert(1, "Predictions", predicted_closing_price, True)
