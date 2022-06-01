@@ -101,8 +101,8 @@ plt.figure(figsize=(16,8))
 
 
 data=df.sort_index(ascending=True,axis=1)
-new_dataset=pd.DataFrame(index=range(0,8360),columns=['Date','Close'])
-for i in range(0,8360):
+new_dataset=pd.DataFrame(index=range(0,8364),columns=['Date','Close'])
+for i in range(0,8364):
     new_dataset["Date"][i]=data['Date'][i]
     new_dataset["Close"][i]=data["Close"][i]
 
@@ -165,8 +165,8 @@ plt.plot(valid_data[['Close',"Predictions"]])
 plt.figure(figsize=(16,8))
 
 data=df.sort_index(ascending=True,axis=1)
-new_dataset=pd.DataFrame(index=range(8366,9800),columns=['Date','Close'])
-for i in range(8366,9800):
+new_dataset=pd.DataFrame(index=range(8366,10222),columns=['Date','Close'])
+for i in range(8366,10222):
     new_dataset["Date"][i]=data['Date'][i]
     new_dataset["Close"][i]=data["Close"][i]
 
@@ -176,8 +176,8 @@ new_dataset.drop("Date",axis=1,inplace=True)
 
 final_dataset=new_dataset.values
 
-train_data=final_dataset[0:987,:]
-valid_data=final_dataset[987:,:]
+train_data=final_dataset[0:1200,:]
+valid_data=final_dataset[1200:,:]
 
 scaler=MinMaxScaler(feature_range=(0,1))
 scaled_data=scaler.fit_transform(final_dataset)
@@ -216,8 +216,8 @@ Y_test = np.reshape(Y_test, (Y_test.shape[0],Y_test.shape[1],1))
 predicted_closing_price = lstm_model.predict(Y_test)
 predicted_closing_price = scaler.inverse_transform(predicted_closing_price)
 
-train_data=new_dataset[:987]
-valid_data=new_dataset[987:]
+train_data=new_dataset[:1200]
+valid_data=new_dataset[1200:]
 valid_data.insert(1, "Predictions", predicted_closing_price, True)
 plt.plot(train_data["Close"])
 plt.plot(valid_data[['Close',"Predictions"]])
