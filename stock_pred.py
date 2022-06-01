@@ -101,10 +101,11 @@ plt.plot(df["Close"],label='Close Price history')
 
 
 data=df.sort_index(ascending=True,axis=0)
-new_dataset=pd.DataFrame(index=range(0,len(df)),columns=['Date','Close'])
+new_dataset=pd.DataFrame(index=range(0,len(df)),columns=['Date','Close','Stock'])
 for i in range(0,len(data)):
-    new_dataset["Date"][i]=data['Date'][i]
-    new_dataset["Close"][i]=data["Close"][i]
+    if data["Stock"][i] == "AAPL":
+        new_dataset["Date"][i]=data['Date'][i]
+        new_dataset["Close"][i]=data["Close"][i]
 
 new_dataset.index=new_dataset.Date
 new_dataset.drop("Date",axis=1,inplace=True)
@@ -137,19 +138,6 @@ lstm_model.add(Dense(1))
 
 lstm_model.compile(loss='mean_squared_error',optimizer='adam')
 lstm_model.fit(x_train_data,y_train_data,epochs=1,batch_size=1,verbose=2)
-
-inputs_data=new_dataset[len(new_dataset)-len(valid_data)-60:].values
-inputs_data=inputs_data.reshape(-1,1)
-inputs_data=scaler.transform(inputs_data)
-
-
-
-
-
-
-
-
-
 
 inputs_data=new_dataset[len(new_dataset)-len(valid_data)-60:].values
 inputs_data=inputs_data.reshape(-1,1)
