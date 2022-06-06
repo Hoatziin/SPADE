@@ -188,9 +188,9 @@ BIDIRECTIONAL = False
 LOSS = "huber_loss"
 OPTIMIZER = "adam"
 BATCH_SIZE = 64
-EPOCHS = 500
+EPOCHS = 5
 # Amazon stock market
-ticker = "AMZN"
+ticker = "TSLA"
 ticker_data_filename = os.path.join("data", f"{ticker}_{date_now}.csv")
 # model name to save, making it as unique as possible based on parameters
 model_name = f"{date_now}_{ticker}-{shuffle_str}-{scale_str}-{split_by_date_str}-\
@@ -333,3 +333,12 @@ print("Total buy profit:", total_buy_profit)
 print("Total sell profit:", total_sell_profit)
 print("Total profit:", total_profit)
 print("Profit per trade:", profit_per_trade)
+plot_graph(final_df)
+
+print(final_df.tail(10))
+# save the final dataframe to csv-results folder
+csv_results_folder = "csv-results"
+if not os.path.isdir(csv_results_folder):
+    os.mkdir(csv_results_folder)
+csv_filename = os.path.join(csv_results_folder, model_name + ".csv")
+final_df.to_csv(csv_filename)
